@@ -116,6 +116,17 @@ pids
 
 # dotenv environment variable files
 .env*
+.env.local
+.env.development
+.env.production
+.env.staging
+
+# API Configuration files
+api-config.json
+config.json
+settings.json
+firebase-config.js
+aws-config.js
 
 # VS Code settings
 .vscode/
@@ -150,6 +161,17 @@ dist/
 # API keys and sensitive files (if any)
 config/keys.js
 config/prod.js
+*.key
+*.pem
+*.p8
+secrets/
+credentials/
+
+# Logo and branding assets (private)
+assets/logo/
+branding/
+logos/
+private-assets/
 
 # Uploads directory (if you have file uploads)
 uploads/

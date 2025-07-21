@@ -1,58 +1,234 @@
 const express = require('express');
 const router = express.Router();
 
-// Sample quiz data
+// Sample quiz data with interactive elements
 const sampleQuizzes = [
   {
     id: 1,
-    title: "Bubble Sort Quiz",
-    description: "Test your understanding of Bubble Sort algorithm",
+    title: "🚂 Train System Quiz - Linked Lists Master!",
+    description: "🎯 Test your train conductor skills! Master linked lists through fun scenarios!",
     courseId: 2,
     lessonId: 1,
-    type: "lesson-quiz",
+    type: "interactive-quiz",
     difficulty: "Beginner",
-    timeLimit: 10, // minutes
+    timeLimit: 15, // minutes
     passingScore: 70,
-    xpReward: 80,
+    xpReward: 120,
+    theme: "train", // For custom styling
     questions: [
       {
         id: 1,
-        question: "What is the time complexity of Bubble Sort in the worst case?",
-        type: "multiple-choice",
+        question: "🚂 Your train has cars: Engine -> [Alice] -> [Bob] -> [Charlie] -> End. If you add [David] at the front, what's the new order?",
+        type: "visual-multiple-choice",
+        scenario: "train-addition",
         options: [
-          { text: "O(n)", isCorrect: false },
-          { text: "O(n log n)", isCorrect: false },
-          { text: "O(n²)", isCorrect: true },
-          { text: "O(2ⁿ)", isCorrect: false }
+          { text: "Engine -> [David] -> [Alice] -> [Bob] -> [Charlie] -> End", isCorrect: true },
+          { text: "Engine -> [Alice] -> [Bob] -> [Charlie] -> [David] -> End", isCorrect: false },
+          { text: "Engine -> [Alice] -> [David] -> [Bob] -> [Charlie] -> End", isCorrect: false },
+          { text: "The train explodes! 💥", isCorrect: false }
         ],
-        explanation: "Bubble Sort has O(n²) time complexity in the worst case because it uses nested loops to compare and swap elements.",
-        points: 1
+        explanation: "🎯 Perfect! When you add a car at the front, it becomes the new head (right after the engine). This is like inserting at the beginning of a linked list!",
+        visualAid: {
+          type: "train-animation",
+          before: "Engine -> [Alice] -> [Bob] -> [Charlie] -> End",
+          after: "Engine -> [David] -> [Alice] -> [Bob] -> [Charlie] -> End",
+          operation: "insertAtFront"
+        },
+        points: 2
       },
       {
         id: 2,
-        question: "In Bubble Sort, what happens in each pass?",
-        type: "multiple-choice",
+        question: "🔄 Time to reverse your train! If your current train is: Engine -> [A] -> [B] -> [C] -> End, what happens after reversing?",
+        type: "interactive-coding",
+        scenario: "train-reversal",
         options: [
-          { text: "The smallest element moves to the beginning", isCorrect: false },
-          { text: "The largest element moves to its correct position", isCorrect: true },
-          { text: "All elements are sorted", isCorrect: false },
-          { text: "Nothing significant happens", isCorrect: false }
+          { text: "Engine -> [C] -> [B] -> [A] -> End", isCorrect: true },
+          { text: "Engine -> [A] -> [B] -> [C] -> End", isCorrect: false },
+          { text: "End -> [A] -> [B] -> [C] -> Engine", isCorrect: false },
+          { text: "The train goes backward physically 🚂💨", isCorrect: false }
         ],
-        explanation: "In each pass of Bubble Sort, the largest unsorted element 'bubbles up' to its correct position at the end of the array.",
-        points: 1
+        explanation: "🔄 Excellent! Reversing a linked list means changing all the pointer directions. The last element becomes first!",
+        codeChallenge: {
+          prompt: "Complete the train reversal function:",
+          starterCode: `void reverseTrain() {
+    TrainCar* prev = nullptr;
+    TrainCar* current = engine;
+    TrainCar* next = nullptr;
+    
+    while (current) {
+        // Your code here!
+    }
+    engine = prev;
+}`,
+          solution: `next = current->nextCar;
+current->nextCar = prev;
+prev = current;
+current = next;`
+        },
+        points: 3
       },
       {
         id: 3,
-        question: "What is the space complexity of Bubble Sort?",
-        type: "multiple-choice",
+        question: "🔍 Detective Time! You're searching for passenger 'Bob' in your train. Which traversal method will you use?",
+        type: "scenario-based",
+        scenario: "passenger-search",
         options: [
-          { text: "O(n)", isCorrect: false },
-          { text: "O(log n)", isCorrect: false },
-          { text: "O(n²)", isCorrect: false },
-          { text: "O(1)", isCorrect: true }
+          { text: "Start from engine and check each car one by one", isCorrect: true },
+          { text: "Check random cars hoping to find Bob", isCorrect: false },
+          { text: "Ask all passengers to shout their names at once", isCorrect: false },
+          { text: "Use magic 🪄", isCorrect: false }
         ],
-        explanation: "Bubble Sort has O(1) space complexity because it sorts the array in-place, using only a constant amount of extra memory.",
-        points: 1
+        explanation: "🔍 Smart detective work! In a linked list, you must traverse sequentially from the head until you find your target. No random access like arrays!",
+        interactiveDemo: {
+          type: "search-animation",
+          description: "Watch how we search through the train car by car!"
+        },
+        points: 2
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: "🍽️ Restaurant Rush Quiz - Stacks & Queues Master!",
+    description: "⚡ Handle the lunch rush! Test your stack and queue management skills!",
+    courseId: 2,
+    lessonId: 2,
+    type: "interactive-quiz",
+    difficulty: "Intermediate", 
+    timeLimit: 12,
+    passingScore: 75,
+    xpReward: 150,
+    theme: "restaurant",
+    questions: [
+      {
+        id: 1,
+        question: "🥞 Your plate stack has: [Bottom] Dinner | Salad | Dessert [Top]. Chef needs a plate! Which one does he get?",
+        type: "visual-multiple-choice",
+        scenario: "plate-stack",
+        options: [
+          { text: "Dessert plate (top of stack)", isCorrect: true },
+          { text: "Dinner plate (bottom of stack)", isCorrect: false },
+          { text: "Salad plate (middle)", isCorrect: false },
+          { text: "Chef makes his own plate 🍽️", isCorrect: false }
+        ],
+        explanation: "🥞 Perfect! Stacks follow LIFO (Last In, First Out). The chef always takes the top plate - that's the dessert plate!",
+        visualAid: {
+          type: "stack-animation",
+          operation: "pop",
+          stackState: ["Dinner", "Salad", "Dessert"]
+        },
+        points: 2
+      },
+      {
+        id: 2,
+        question: "👥 Customer queue: [Front] Alice -> Bob -> Charlie [Back]. Who gets served first?",
+        type: "queue-simulation",
+        scenario: "customer-service",
+        options: [
+          { text: "Alice (front of queue)", isCorrect: true },
+          { text: "Charlie (back of queue)", isCorrect: false },
+          { text: "Bob (middle)", isCorrect: false },
+          { text: "Whoever tips the most 💰", isCorrect: false }
+        ],
+        explanation: "👥 Excellent! Queues follow FIFO (First In, First Out). Alice came first, so she gets served first. Fair and square!",
+        gameElement: {
+          type: "queue-simulator",
+          description: "Try serving customers in the right order!"
+        },
+        points: 2
+      },
+      {
+        id: 3,
+        question: "⚡ RUSH HOUR! 3 orders came in fast: Burger, Pizza, Pasta. Kitchen uses a stack to process orders. Which gets cooked first?",
+        type: "emergency-scenario",
+        scenario: "rush-hour",
+        options: [
+          { text: "Pasta (latest order, top of stack)", isCorrect: true },
+          { text: "Burger (first order, bottom of stack)", isCorrect: false },
+          { text: "Pizza (middle order)", isCorrect: false },
+          { text: "All at once! Multi-tasking! 🤹‍♂️", isCorrect: false }
+        ],
+        explanation: "⚡ Great crisis management! Kitchen stack processes latest orders first (LIFO). Pasta is the newest order, so it gets priority during rush hour!",
+        rushHourChallenge: {
+          type: "time-pressure-game",
+          description: "Handle 10 orders in 30 seconds using proper stack operations!"
+        },
+        points: 3
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: "👨‍👩‍👧‍👦 Family Tree Quiz - Trees & BST Master!",
+    description: "🌳 Test your genealogy skills! Navigate family trees like a pro!",
+    courseId: 2,
+    lessonId: 3,
+    type: "interactive-quiz",
+    difficulty: "Advanced",
+    timeLimit: 18,
+    passingScore: 80,
+    xpReward: 200,
+    theme: "family-tree",
+    questions: [
+      {
+        id: 1,
+        question: "🌳 In the Smith family tree, Grandpa (85) is the root. Where would you place Uncle Bob (60) in a BST organized by age?",
+        type: "tree-placement",
+        scenario: "family-insertion",
+        familyTree: {
+          root: { name: "Grandpa", age: 85 },
+          structure: "BST_by_age"
+        },
+        options: [
+          { text: "Left child of Grandpa (60 < 85)", isCorrect: true },
+          { text: "Right child of Grandpa (60 > 85)", isCorrect: false },
+          { text: "As a sibling of Grandpa", isCorrect: false },
+          { text: "Uncle Bob doesn't belong in trees! 🌳❌", isCorrect: false }
+        ],
+        explanation: "🌳 Perfect genealogy skills! In a BST organized by age, younger members (60) go to the left of older members (85). Uncle Bob becomes Grandpa's left child!",
+        treeVisualization: {
+          type: "animated-insertion",
+          showProcess: true
+        },
+        points: 3
+      },
+      {
+        id: 2,
+        question: "🎉 Family Reunion! You want to visit all family members from youngest to oldest. Which traversal will you use?",
+        type: "traversal-strategy",
+        scenario: "family-reunion",
+        options: [
+          { text: "Inorder traversal (Left -> Root -> Right)", isCorrect: true },
+          { text: "Preorder traversal (Root -> Left -> Right)", isCorrect: false },
+          { text: "Postorder traversal (Left -> Right -> Root)", isCorrect: false },
+          { text: "Random visits - surprise everyone! 🎊", isCorrect: false }
+        ],
+        explanation: "🎉 Brilliant reunion planning! Inorder traversal of a BST visits nodes in sorted order. For age-based BST, this means youngest to oldest!",
+        traversalDemo: {
+          type: "family-reunion-simulator",
+          showVisitOrder: true,
+          highlightTraversal: "inorder"
+        },
+        points: 3
+      },
+      {
+        id: 3,
+        question: "🔍 Emergency! You need to find 'Little Timmy' in a family tree of 100 members. What's the advantage of using a BST?",
+        type: "efficiency-analysis",
+        scenario: "emergency-search",
+        options: [
+          { text: "O(log n) search time - much faster than linear search!", isCorrect: true },
+          { text: "O(n) search time - same as checking everyone", isCorrect: false },
+          { text: "O(n²) search time - slower than linear search", isCorrect: false },
+          { text: "Timmy will find you first! 👶", isCorrect: false }
+        ],
+        explanation: "🔍 Excellent emergency response! BST allows O(log n) search by eliminating half the possibilities at each step. Much faster than checking all 100 family members!",
+        complexityVisualization: {
+          type: "search-comparison",
+          showLinearVsBST: true,
+          familySize: 100
+        },
+        points: 4
       }
     ]
   }

@@ -458,150 +458,306 @@ vector<int> maxSlidingWindow(vector<int>& nums, int k) {
 }`,
             testCases: [
               {
-                input: "nums = [2,7,11,15], target = 9",
-                expectedOutput: "[0,1]",
-                description: "Two Sum example"
+                input: "addCarAtFront('Alice', 1); addCarAtEnd('Bob', 2);",
+                expectedOutput: "🚂 ENGINE -> [Car #1: Alice] -> [Car #2: Bob] -> 🏁 END",
+                description: "Test adding passengers to front and end"
               },
               {
-                input: "nums = [1,3,-1,-3,5,3,6,7], k = 3",
-                expectedOutput: "[3,3,5,5,6,7]",
-                description: "Sliding window maximum example"
+                input: "addCarAtFront('Charlie', 3); reverseTrain();",
+                expectedOutput: "Train direction should be completely reversed",
+                description: "Test train reversal functionality"
+              },
+              {
+                input: "removePassenger('Alice');",
+                expectedOutput: "Alice should be removed from the train",
+                description: "Test passenger removal"
+              },
+              {
+                input: "findPassenger('Bob');",
+                expectedOutput: "✅ Found Bob in car #2 at position X!",
+                description: "Test passenger search"
               }
             ]
-          }
+          },
+          interactiveElements: [
+            {
+              type: "visualization",
+              title: "🎬 Train Animation",
+              description: "Watch how your train changes as you add/remove cars!",
+              component: "LinkedListVisualizer"
+            },
+            {
+              type: "quiz",
+              title: "🧠 Quick Check!",
+              questions: [
+                {
+                  question: "🤔 What happens when you add a car at the front?",
+                  options: [
+                    "The new car becomes the engine",
+                    "The car goes to the end",
+                    "Nothing happens",
+                    "The train explodes 💥"
+                  ],
+                  correct: 0,
+                  explanation: "Correct! When adding at front, the new car becomes the new 'head' or engine! 🚂"
+                }
+              ]
+            },
+            {
+              type: "challenge",
+              title: "🏆 BONUS CHALLENGE",
+              description: "Add a function to find the middle car of your train in ONE pass!",
+              hint: "Use two pointers - one slow (1 step) and one fast (2 steps)! 🐢🐰"
+            }
+          ]
         },
         learningObjectives: [
-          "Master two-pointer technique",
-          "Understand sliding window pattern",
-          "Solve array problems efficiently"
+          "🎯 Build a train system using linked lists",
+          "🚂 Master node insertion and deletion", 
+          "🔄 Understand pointer manipulation",
+          "🔍 Implement search algorithms",
+          "🎮 Apply data structures to real scenarios"
         ],
         isPublished: true,
         isActive: true
       },
       {
-        title: "Linked Lists: Implementation and Operations",
-        description: "Learn to implement singly and doubly linked lists with all basic operations",
+        title: "🔗 Linked Lists: Build a Train System!",
+        description: "🚂 Build an interactive train system to master linked lists! Each train car is a node connected to the next one!",
         course: dsaCourse._id,
         order: 3,
-        type: "code",
+        type: "interactive",
         difficulty: "intermediate",
         estimatedTime: 75,
         xpReward: 80,
         content: {
-          text: `Linked lists are linear data structures where elements are stored in nodes, each containing data and a reference to the next node.`,
+          text: `🎯 **MISSION: Build a Digital Train System!**
+
+**🤔 Real-World Connection:**
+Think of a train! Each car is connected to the next one. That's exactly how a Linked List works!
+- Train Engine = Head node
+- Train Cars = Data nodes  
+- Couplers = Pointers/Links
+
+**🎮 Interactive Challenge:**
+आज आप एक Train Conductor बनेंगे और अपनी train को manage करेंगे!
+
+**🚀 What You'll Build:**
+1. Add new train cars (Insert nodes)
+2. Remove broken cars (Delete nodes)
+3. Reverse your entire train direction!
+4. Find specific passengers in cars
+
+**💡 Why Linked Lists?**
+- Dynamic size (add cars as needed!)
+- Efficient insertion/deletion
+- Used in: Music playlists, Browser history, Undo operations`,
           code: {
             language: "cpp",
             starterCode: `#include <iostream>
+#include <string>
 using namespace std;
 
-struct ListNode {
-    int val;
-    ListNode* next;
-    ListNode(int x) : val(x), next(nullptr) {}
+// 🚂 Train Car Structure
+struct TrainCar {
+    string passenger;
+    int carNumber;
+    TrainCar* nextCar;
+    
+    TrainCar(string name, int num) : passenger(name), carNumber(num), nextCar(nullptr) {}
 };
 
-class LinkedList {
+// 🚂 Train Management System
+class TrainSystem {
 private:
-    ListNode* head;
+    TrainCar* engine; // Head of our train
     
 public:
-    LinkedList() : head(nullptr) {}
-    
-    // Insert at the beginning
-    void insertAtHead(int val) {
-        // Your code here
+    TrainSystem() : engine(nullptr) {
+        cout << "🚂 New Train System Created! All aboard! 🎫" << endl;
     }
     
-    // Insert at the end
-    void insertAtTail(int val) {
-        // Your code here
+    // 🎯 CHALLENGE 1: Add a new passenger car to the front
+    void addCarAtFront(string passenger, int carNum) {
+        cout << "🚂 Adding " << passenger << " to car #" << carNum << " at the front!" << endl;
+        // TODO: Your code here!
+        // Hint: Create new car, link it to current engine, update engine
     }
     
-    // Delete a node with given value
-    void deleteNode(int val) {
-        // Your code here
+    // 🎯 CHALLENGE 2: Add a car at the end of the train
+    void addCarAtEnd(string passenger, int carNum) {
+        cout << "🚃 Adding " << passenger << " to car #" << carNum << " at the end!" << endl;
+        // TODO: Your code here!
+        // Hint: Traverse to the last car, then add new car
     }
     
-    // Reverse the linked list
-    void reverse() {
-        // Your code here
+    // 🎯 CHALLENGE 3: Remove a specific car (passenger leaves!)
+    void removePassenger(string passenger) {
+        cout << "👋 " << passenger << " is leaving the train!" << endl;
+        // TODO: Your code here!
+        // Hint: Find the car, update links, delete the car
     }
     
-    // Display the list
-    void display() {
-        // Your code here
+    // 🎯 CHALLENGE 4: Reverse the entire train direction!
+    void reverseTrain() {
+        cout << "🔄 REVERSING TRAIN DIRECTION! Choo choo!" << endl;
+        // TODO: Your code here!
+        // Hint: Use three pointers: previous, current, next
     }
-};`,
-            solutionCode: `class LinkedList {
+    
+    // 🚂 Display the entire train
+    void showTrain() {
+        cout << "\n🚂 CURRENT TRAIN STATUS:" << endl;
+        cout << "ENGINE";
+        TrainCar* current = engine;
+        while (current) {
+            cout << " -> [Car #" << current->carNumber << ": " << current->passenger << "]";
+            current = current->nextCar;
+        }
+        cout << " -> 🏁 END" << endl << endl;
+    }
+    
+    // 🔍 Find a passenger in the train
+    bool findPassenger(string passenger) {
+        TrainCar* current = engine;
+        int position = 1;
+        while (current) {
+            if (current->passenger == passenger) {
+                cout << "✅ Found " << passenger << " in car #" << current->carNumber 
+                     << " at position " << position << "!" << endl;
+                return true;
+            }
+            current = current->nextCar;
+            position++;
+        }
+        cout << "❌ " << passenger << " not found on this train!" << endl;
+        return false;
+    }
+};
+
+// 🎮 Interactive Demo Function
+void runTrainDemo() {
+    cout << "\n🎮 === WELCOME TO TRAIN LINKED LIST SIMULATOR === 🚂" << endl;
+    cout << "You are the Train Conductor! Manage your passengers wisely!" << endl;
+    
+    TrainSystem myTrain;
+    
+    // Step-by-step tutorial
+    cout << "\n📚 TUTORIAL: Let's add some passengers..." << endl;
+    myTrain.addCarAtFront("Alice", 1);
+    myTrain.showTrain();
+    
+    myTrain.addCarAtEnd("Bob", 2);
+    myTrain.showTrain();
+    
+    myTrain.addCarAtFront("Charlie", 3);
+    myTrain.showTrain();
+    
+    cout << "\n🔍 SEARCHING for passengers..." << endl;
+    myTrain.findPassenger("Alice");
+    myTrain.findPassenger("David");
+    
+    cout << "\n🔄 REVERSING the train..." << endl;
+    myTrain.reverseTrain();
+    myTrain.showTrain();
+    
+    cout << "\n👋 Charlie is leaving..." << endl;
+    myTrain.removePassenger("Charlie");
+    myTrain.showTrain();
+}`,
+            solutionCode: `// 🎯 COMPLETE SOLUTION - Train Linked List System
+
+class TrainSystem {
 private:
-    ListNode* head;
+    TrainCar* engine;
     
 public:
-    LinkedList() : head(nullptr) {}
-    
-    void insertAtHead(int val) {
-        ListNode* newNode = new ListNode(val);
-        newNode->next = head;
-        head = newNode;
+    TrainSystem() : engine(nullptr) {
+        cout << "🚂 New Train System Created! All aboard! 🎫" << endl;
     }
     
-    void insertAtTail(int val) {
-        ListNode* newNode = new ListNode(val);
-        if (!head) {
-            head = newNode;
-            return;
-        }
-        ListNode* current = head;
-        while (current->next) {
-            current = current->next;
-        }
-        current->next = newNode;
+    // ✅ SOLUTION 1: Add car at front
+    void addCarAtFront(string passenger, int carNum) {
+        cout << "🚂 Adding " << passenger << " to car #" << carNum << " at the front!" << endl;
+        TrainCar* newCar = new TrainCar(passenger, carNum);
+        newCar->nextCar = engine;
+        engine = newCar;
+        cout << "✅ " << passenger << " successfully boarded!" << endl;
     }
     
-    void deleteNode(int val) {
-        if (!head) return;
+    // ✅ SOLUTION 2: Add car at end
+    void addCarAtEnd(string passenger, int carNum) {
+        cout << "🚃 Adding " << passenger << " to car #" << carNum << " at the end!" << endl;
+        TrainCar* newCar = new TrainCar(passenger, carNum);
         
-        if (head->val == val) {
-            ListNode* temp = head;
-            head = head->next;
-            delete temp;
+        if (!engine) {
+            engine = newCar;
+            cout << "✅ " << passenger << " is now in the engine car!" << endl;
             return;
         }
         
-        ListNode* current = head;
-        while (current->next && current->next->val != val) {
-            current = current->next;
+        TrainCar* current = engine;
+        while (current->nextCar) {
+            current = current->nextCar;
+        }
+        current->nextCar = newCar;
+        cout << "✅ " << passenger << " successfully boarded at the end!" << endl;
+    }
+    
+    // ✅ SOLUTION 3: Remove passenger
+    void removePassenger(string passenger) {
+        cout << "👋 " << passenger << " is leaving the train!" << endl;
+        
+        if (!engine) {
+            cout << "❌ Train is empty!" << endl;
+            return;
         }
         
-        if (current->next) {
-            ListNode* temp = current->next;
-            current->next = current->next->next;
+        // If passenger is in the engine car
+        if (engine->passenger == passenger) {
+            TrainCar* temp = engine;
+            engine = engine->nextCar;
             delete temp;
+            cout << "✅ " << passenger << " has left the train!" << endl;
+            return;
+        }
+        
+        // Search for passenger in other cars
+        TrainCar* current = engine;
+        while (current->nextCar && current->nextCar->passenger != passenger) {
+            current = current->nextCar;
+        }
+        
+        if (current->nextCar) {
+            TrainCar* temp = current->nextCar;
+            current->nextCar = current->nextCar->nextCar;
+            delete temp;
+            cout << "✅ " << passenger << " has left the train!" << endl;
+        } else {
+            cout << "❌ " << passenger << " not found on this train!" << endl;
         }
     }
     
-    void reverse() {
-        ListNode* prev = nullptr;
-        ListNode* current = head;
-        ListNode* next = nullptr;
+    // ✅ SOLUTION 4: Reverse train
+    void reverseTrain() {
+        cout << "🔄 REVERSING TRAIN DIRECTION! Choo choo!" << endl;
+        
+        TrainCar* previous = nullptr;
+        TrainCar* current = engine;
+        TrainCar* next = nullptr;
         
         while (current) {
-            next = current->next;
-            current->next = prev;
-            prev = current;
-            current = next;
+            next = current->nextCar;  // Store next car
+            current->nextCar = previous;  // Reverse the link
+            previous = current;  // Move previous forward
+            current = next;  // Move current forward
         }
-        head = prev;
+        
+        engine = previous;  // Update engine to the new front
+        cout << "✅ Train direction reversed! 🔄" << endl;
     }
     
-    void display() {
-        ListNode* current = head;
-        while (current) {
-            cout << current->val << " -> ";
-            current = current->next;
-        }
-        cout << "NULL" << endl;
-    }
+    // Display, search functions remain same...
 };`
           }
         },
@@ -614,32 +770,546 @@ public:
         isActive: true
       },
       {
-        title: "Stacks and Queues Implementation",
-        description: "Learn stack and queue data structures with practical implementations and applications",
+        title: "🥞 Stacks & Queues: Restaurant Management Game!",
+        description: "🍽️ Run a busy restaurant! Use stacks for plates and queues for customer orders. Master LIFO and FIFO!",
         course: dsaCourse._id,
         order: 4,
-        type: "code",
+        type: "interactive",
         difficulty: "intermediate",
         estimatedTime: 70,
         xpReward: 85,
         content: {
-          text: "Master stack and queue data structures and their real-world applications."
+          text: `🎯 **MISSION: Manage a Busy Restaurant!**
+
+**🍽️ Real-World Scenario:**
+You're managing "DevShiksha Diner" - the hottest restaurant in town!
+- **Stack of Plates** 🥞: Last plate in, first plate out (LIFO)
+- **Customer Queue** 👥: First customer in, first served (FIFO)
+
+**🎮 Your Challenges:**
+1. **Plate Manager**: Stack clean plates efficiently
+2. **Order Queue**: Handle customer orders fairly  
+3. **Kitchen Stack**: Manage cooking orders
+4. **Emergency Situations**: Handle rush hours!
+
+**💡 Why These Matter?**
+- **Stacks**: Undo operations, Browser history, Function calls
+- **Queues**: Print jobs, CPU scheduling, BFS algorithms`,
+          code: {
+            language: "cpp",
+            starterCode: `#include <iostream>
+#include <string>
+#include <queue>
+#include <stack>
+using namespace std;
+
+// 🥞 Plate Stack Manager
+class PlateStack {
+private:
+    stack<string> plates;
+    
+public:
+    // 🎯 CHALLENGE 1: Add a clean plate to the stack
+    void addPlate(string plateType) {
+        cout << "🍽️ Adding " << plateType << " plate to stack!" << endl;
+        // TODO: Add plate to stack
+    }
+    
+    // 🎯 CHALLENGE 2: Take a plate from the top
+    string takePlate() {
+        cout << "👨‍🍳 Chef needs a plate!" << endl;
+        // TODO: Remove and return top plate
+        // Remember to check if stack is empty!
+        return "";
+    }
+    
+    // 📊 Show current plates
+    void showPlates() {
+        stack<string> temp = plates;
+        cout << "🥞 PLATES STACK (top to bottom): ";
+        while (!temp.empty()) {
+            cout << temp.top() << " | ";
+            temp.pop();
+        }
+        cout << "🔚" << endl;
+    }
+    
+    bool isEmpty() { return plates.empty(); }
+    int size() { return plates.size(); }
+};
+
+// 👥 Customer Queue Manager  
+class CustomerQueue {
+private:
+    queue<string> customers;
+    
+public:
+    // 🎯 CHALLENGE 3: Add customer to queue
+    void addCustomer(string customerName) {
+        cout << "👋 Welcome " << customerName << "! Please wait in line." << endl;
+        // TODO: Add customer to queue
+    }
+    
+    // 🎯 CHALLENGE 4: Serve the next customer
+    string serveCustomer() {
+        cout << "🍽️ Serving next customer..." << endl;
+        // TODO: Remove and return first customer in queue
+        // Remember to check if queue is empty!
+        return "";
+    }
+    
+    // 📊 Show current queue
+    void showQueue() {
+        queue<string> temp = customers;
+        cout << "👥 CUSTOMER QUEUE (front to back): ";
+        while (!temp.empty()) {
+            cout << temp.front() << " -> ";
+            temp.pop();
+        }
+        cout << "🔚" << endl;
+    }
+    
+    bool isEmpty() { return customers.empty(); }
+    int size() { return customers.size(); }
+};
+
+// 🍽️ Restaurant Management System
+class RestaurantManager {
+private:
+    PlateStack plateStack;
+    CustomerQueue customerQueue;
+    stack<string> kitchenOrders; // Cooking orders (LIFO - latest order priority)
+    
+public:
+    // 🎮 Interactive Restaurant Simulation
+    void runRestaurant() {
+        cout << "\n🎮 === WELCOME TO DEVSHIKSHA DINER === 🍽️" << endl;
+        cout << "You are the Restaurant Manager! Handle plates and customers wisely!" << endl;
+        
+        // Morning setup
+        cout << "\n🌅 MORNING SETUP..." << endl;
+        plateStack.addPlate("Dinner");
+        plateStack.addPlate("Salad"); 
+        plateStack.addPlate("Dessert");
+        plateStack.showPlates();
+        
+        // Customers arrive
+        cout << "\n👥 CUSTOMERS ARRIVING..." << endl;
+        customerQueue.addCustomer("Alice");
+        customerQueue.addCustomer("Bob");
+        customerQueue.addCustomer("Charlie");
+        customerQueue.showQueue();
+        
+        // Service simulation
+        cout << "\n🍽️ STARTING SERVICE..." << endl;
+        serveOneCustomer();
+        serveOneCustomer();
+        
+        // Rush hour challenge!
+        cout << "\n⚡ RUSH HOUR CHALLENGE!" << endl;
+        handleRushHour();
+    }
+    
+    // 🎯 CHALLENGE 5: Serve one complete customer
+    void serveOneCustomer() {
+        cout << "\n--- SERVING CUSTOMER ---" << endl;
+        // TODO: 
+        // 1. Get customer from queue
+        // 2. Take plate from stack
+        // 3. Show service completion
+    }
+    
+    // 🎯 CHALLENGE 6: Handle rush hour efficiently
+    void handleRushHour() {
+        cout << "⚡ Multiple orders coming in fast!" << endl;
+        // TODO: Add multiple kitchen orders to stack
+        // Then process them in LIFO order (latest first)
+    }
+};`,
+            solutionCode: `// 🎯 COMPLETE SOLUTION - Restaurant Management System
+
+class PlateStack {
+private:
+    stack<string> plates;
+    
+public:
+    // ✅ SOLUTION 1: Add plate
+    void addPlate(string plateType) {
+        cout << "🍽️ Adding " << plateType << " plate to stack!" << endl;
+        plates.push(plateType);
+        cout << "✅ Plate added! Stack size: " << plates.size() << endl;
+    }
+    
+    // ✅ SOLUTION 2: Take plate
+    string takePlate() {
+        cout << "👨‍🍳 Chef needs a plate!" << endl;
+        if (plates.empty()) {
+            cout << "❌ No plates available! Need to wash more!" << endl;
+            return "NO_PLATE";
+        }
+        string plate = plates.top();
+        plates.pop();
+        cout << "✅ Gave " << plate << " plate to chef!" << endl;
+        return plate;
+    }
+    
+    void showPlates() {
+        stack<string> temp = plates;
+        cout << "🥞 PLATES STACK (top to bottom): ";
+        if (temp.empty()) {
+            cout << "EMPTY!";
+        }
+        while (!temp.empty()) {
+            cout << temp.top() << " | ";
+            temp.pop();
+        }
+        cout << "🔚" << endl;
+    }
+    
+    bool isEmpty() { return plates.empty(); }
+    int size() { return plates.size(); }
+};
+
+class CustomerQueue {
+private:
+    queue<string> customers;
+    
+public:
+    // ✅ SOLUTION 3: Add customer
+    void addCustomer(string customerName) {
+        cout << "👋 Welcome " << customerName << "! Please wait in line." << endl;
+        customers.push(customerName);
+        cout << "✅ " << customerName << " added to queue! Position: " << customers.size() << endl;
+    }
+    
+    // ✅ SOLUTION 4: Serve customer
+    string serveCustomer() {
+        cout << "🍽️ Serving next customer..." << endl;
+        if (customers.empty()) {
+            cout << "❌ No customers waiting!" << endl;
+            return "NO_CUSTOMER";
+        }
+        string customer = customers.front();
+        customers.pop();
+        cout << "✅ Now serving: " << customer << "!" << endl;
+        return customer;
+    }
+    
+    void showQueue() {
+        queue<string> temp = customers;
+        cout << "👥 CUSTOMER QUEUE (front to back): ";
+        if (temp.empty()) {
+            cout << "EMPTY!";
+        }
+        while (!temp.empty()) {
+            cout << temp.front() << " -> ";
+            temp.pop();
+        }
+        cout << "🔚" << endl;
+    }
+    
+    bool isEmpty() { return customers.empty(); }
+    int size() { return customers.size(); }
+};
+
+// Complete restaurant manager implementation...
+class RestaurantManager {
+    // ✅ SOLUTION 5: Serve complete customer
+    void serveOneCustomer() {
+        cout << "\n--- SERVING CUSTOMER ---" << endl;
+        string customer = customerQueue.serveCustomer();
+        string plate = plateStack.takePlate();
+        
+        if (customer != "NO_CUSTOMER" && plate != "NO_PLATE") {
+            cout << "🎉 Successfully served " << customer << " with " << plate << " plate!" << endl;
+        } else {
+            cout << "❌ Service failed - missing customer or plate!" << endl;
+        }
+        
+        cout << "📊 Current Status:" << endl;
+        customerQueue.showQueue();
+        plateStack.showPlates();
+    }
+    
+    // ✅ SOLUTION 6: Rush hour handling
+    void handleRushHour() {
+        cout << "⚡ Multiple orders coming in fast!" << endl;
+        
+        // Add orders to kitchen stack (LIFO - latest first)
+        kitchenOrders.push("Burger");
+        kitchenOrders.push("Pizza");
+        kitchenOrders.push("Pasta");
+        
+        cout << "📋 Kitchen Orders (latest first):" << endl;
+        stack<string> temp = kitchenOrders;
+        while (!temp.empty()) {
+            cout << "🍳 Cooking: " << temp.top() << endl;
+            temp.pop();
+        }
+    }
+};`
+          }
         },
+        learningObjectives: [
+          "🥞 Master Stack operations (LIFO)",
+          "👥 Understand Queue operations (FIFO)", 
+          "🍽️ Apply data structures to real scenarios",
+          "⚡ Handle complex restaurant operations",
+          "🎮 Build interactive management systems"
+        ],
         isPublished: true,
         isActive: true
       },
       {
-        title: "Trees and Binary Search Trees",
-        description: "Understand tree structures, binary trees, BST operations, and tree traversals",
+        title: "🌳 Trees & BST: Build a Family Tree Explorer!",
+        description: "👨‍👩‍👧‍👦 Create an interactive family tree! Learn tree traversals, BST operations, and genealogy algorithms!",
         course: dsaCourse._id,
         order: 5,
-        type: "code",
+        type: "interactive",
         difficulty: "intermediate",
         estimatedTime: 90,
         xpReward: 100,
         content: {
-          text: "Learn tree data structures and implement efficient search operations."
-        },
+          text: `🎯 **MISSION: Build a Digital Family Tree!**
+
+**👨‍👩‍👧‍👦 Real-World Connection:**
+Ever wondered how ancestry websites work? They use Tree data structures!
+- **Root**: Oldest ancestor
+- **Nodes**: Family members  
+- **Children**: Direct descendants
+- **Leaves**: Current generation
+
+**🎮 Your Family Tree Features:**
+1. **Add Family Members**: Insert new relatives
+2. **Family Search**: Find any relative quickly
+3. **Generation Explorer**: Traverse different generations
+4. **Family Statistics**: Count descendants, ancestors
+
+**💡 Why Trees Matter?**
+- **File Systems**: Folders and subfolders
+- **Decision Making**: Game AI, Machine Learning
+- **Databases**: Efficient searching and sorting`,
+          code: {
+            language: "cpp",
+            starterCode: `#include <iostream>
+#include <string>
+#include <queue>
+using namespace std;
+
+// 👨‍👩‍👧‍👦 Family Member Structure
+struct FamilyMember {
+    string name;
+    int age;
+    string relationship; // "parent", "child", "grandparent", etc.
+    FamilyMember* left;   // First child or younger sibling
+    FamilyMember* right;  // Next sibling
+    
+    FamilyMember(string n, int a, string rel) : 
+        name(n), age(a), relationship(rel), left(nullptr), right(nullptr) {}
+};
+
+// 🌳 Family Tree Manager
+class FamilyTree {
+private:
+    FamilyMember* root; // Family patriarch/matriarch
+    
+public:
+    FamilyTree() : root(nullptr) {
+        cout << "👨‍👩‍👧‍👦 New Family Tree Created! Let's build your genealogy! 📜" << endl;
+    }
+    
+    // 🎯 CHALLENGE 1: Add the family founder (root)
+    void addFounder(string name, int age) {
+        cout << "👑 Adding family founder: " << name << " (age " << age << ")" << endl;
+        // TODO: Create root node with founder's info
+    }
+    
+    // 🎯 CHALLENGE 2: Add a family member to the tree
+    FamilyMember* addMember(FamilyMember* current, string name, int age, string relationship) {
+        cout << "👶 Adding " << name << " as " << relationship << endl;
+        // TODO: Implement BST insertion based on age
+        // Younger members go left, older go right
+        return current;
+    }
+    
+    // 🎯 CHALLENGE 3: Find a family member
+    FamilyMember* findMember(FamilyMember* current, string name) {
+        cout << "🔍 Searching for " << name << " in the family tree..." << endl;
+        // TODO: Implement tree search
+        return nullptr;
+    }
+    
+    // 🎯 CHALLENGE 4: Family reunion! (Inorder traversal)
+    void familyReunion(FamilyMember* current) {
+        cout << "🎉 FAMILY REUNION! Meeting everyone in age order..." << endl;
+        // TODO: Implement inorder traversal (left -> root -> right)
+        // This will show family members from youngest to oldest!
+    }
+    
+    // 🎯 CHALLENGE 5: Generation explorer (Level order traversal)
+    void exploreGenerations() {
+        cout << "🏠 Exploring family by generations..." << endl;
+        // TODO: Implement level-order traversal using queue
+        // Show each generation separately!
+    }
+    
+    // 📊 Family Statistics
+    int countFamilyMembers(FamilyMember* current) {
+        // TODO: Count total family members
+        return 0;
+    }
+    
+    int findOldestAge(FamilyMember* current) {
+        // TODO: Find age of oldest family member
+        return 0;
+    }
+    
+    // 🎮 Interactive Family Demo
+    void familyDemo() {
+        cout << "\n🎮 === FAMILY TREE BUILDER === 👨‍👩‍👧‍👦" << endl;
+        cout << "Let's build the Smith family tree!" << endl;
+        
+        // Building the family tree
+        addFounder("Grandpa Smith", 85);
+        
+        cout << "\n👨‍👩‍👧‍👦 Adding family members..." << endl;
+        root = addMember(root, "Dad Smith", 55, "son");
+        root = addMember(root, "Uncle Bob", 60, "son");
+        root = addMember(root, "Little Timmy", 8, "grandson");
+        root = addMember(root, "Sister Sarah", 25, "daughter");
+        
+        cout << "\n🎉 Family reunion time!" << endl;
+        familyReunion(root);
+        
+        cout << "\n🏠 Exploring generations..." << endl;
+        exploreGenerations();
+        
+        cout << "\n🔍 Finding family members..." << endl;
+        FamilyMember* found = findMember(root, "Little Timmy");
+        if (found) {
+            cout << "✅ Found " << found->name << "! He's the " << found->relationship << endl;
+        }
+        
+        cout << "\n📊 Family Statistics:" << endl;
+        cout << "👥 Total family members: " << countFamilyMembers(root) << endl;
+        cout << "👴 Oldest member age: " << findOldestAge(root) << endl;
+    }
+};`,
+            solutionCode: `// 🎯 COMPLETE SOLUTION - Family Tree System
+
+class FamilyTree {
+private:
+    FamilyMember* root;
+    
+public:
+    FamilyTree() : root(nullptr) {
+        cout << "👨‍👩‍👧‍👦 New Family Tree Created! Let's build your genealogy! 📜" << endl;
+    }
+    
+    // ✅ SOLUTION 1: Add founder
+    void addFounder(string name, int age) {
+        cout << "👑 Adding family founder: " << name << " (age " << age << ")" << endl;
+        root = new FamilyMember(name, age, "founder");
+        cout << "✅ " << name << " is now the family patriarch/matriarch!" << endl;
+    }
+    
+    // ✅ SOLUTION 2: Add family member (BST insertion)
+    FamilyMember* addMember(FamilyMember* current, string name, int age, string relationship) {
+        cout << "👶 Adding " << name << " as " << relationship << endl;
+        
+        // Base case: create new member
+        if (current == nullptr) {
+            FamilyMember* newMember = new FamilyMember(name, age, relationship);
+            cout << "✅ " << name << " joined the family!" << endl;
+            return newMember;
+        }
+        
+        // BST insertion based on age
+        if (age < current->age) {
+            current->left = addMember(current->left, name, age, relationship);
+        } else {
+            current->right = addMember(current->right, name, age, relationship);
+        }
+        
+        return current;
+    }
+    
+    // ✅ SOLUTION 3: Find family member
+    FamilyMember* findMember(FamilyMember* current, string name) {
+        if (current == nullptr) {
+            cout << "❌ " << name << " not found in family tree!" << endl;
+            return nullptr;
+        }
+        
+        if (current->name == name) {
+            cout << "✅ Found " << name << "! Age: " << current->age << endl;
+            return current;
+        }
+        
+        // Search both subtrees
+        FamilyMember* leftResult = findMember(current->left, name);
+        if (leftResult != nullptr) return leftResult;
+        
+        return findMember(current->right, name);
+    }
+    
+    // ✅ SOLUTION 4: Family reunion (Inorder traversal)
+    void familyReunion(FamilyMember* current) {
+        if (current == nullptr) return;
+        
+        // Left subtree (younger members)
+        familyReunion(current->left);
+        
+        // Current member
+        cout << "👋 " << current->name << " (age " << current->age 
+             << ", " << current->relationship << ")" << endl;
+        
+        // Right subtree (older members)
+        familyReunion(current->right);
+    }
+    
+    // ✅ SOLUTION 5: Generation explorer (Level order)
+    void exploreGenerations() {
+        if (root == nullptr) return;
+        
+        queue<FamilyMember*> q;
+        q.push(root);
+        int generation = 1;
+        
+        while (!q.empty()) {
+            int levelSize = q.size();
+            cout << "🏠 Generation " << generation << ": ";
+            
+            for (int i = 0; i < levelSize; i++) {
+                FamilyMember* current = q.front();
+                q.pop();
+                
+                cout << current->name << "(" << current->age << ") ";
+                
+                if (current->left) q.push(current->left);
+                if (current->right) q.push(current->right);
+            }
+            cout << endl;
+            generation++;
+        }
+    }
+    
+    // Family statistics implementations...
+    int countFamilyMembers(FamilyMember* current) {
+        if (current == nullptr) return 0;
+        return 1 + countFamilyMembers(current->left) + countFamilyMembers(current->right);
+    }
+    
+    int findOldestAge(FamilyMember* current) {
+        if (current == nullptr) return 0;
+        
+        // In BST, rightmost node has maximum value
+        while (current->right != nullptr) {
+            current = current->right;
+        }
+        return current->age;
+    }
+};`
         isPublished: true,
         isActive: true
       },
