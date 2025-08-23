@@ -32,7 +32,7 @@ const quizSchema = new mongoose.Schema({
   category: {
     type: String,
     required: [true, 'Category is required'],
-    enum: ['algorithms', 'data-structures', 'programming', 'theory', 'problem-solving']
+    enum: ['algorithms', 'data-structures', 'programming', 'theory', 'problem-solving', 'system-design', 'web-development', 'devops', 'ai-ml', 'database']
   },
   timeLimit: {
     type: Number,

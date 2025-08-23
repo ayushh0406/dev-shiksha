@@ -1310,6 +1310,8 @@ public:
         return current->age;
     }
 };`
+          }
+        },
         isPublished: true,
         isActive: true
       },
@@ -1927,54 +1929,306 @@ You can only guarantee 2 out of 3:
     const savedDbLessons = await Lesson.insertMany(dbLessons);
     console.log(`🗃️ Created ${savedDbLessons.length} Database lessons`);
 
-    // Create sample quizzes
+    // Create comprehensive quizzes for all courses
     const sampleQuizzes = [
+      // DSA Course Quizzes
       {
-        title: "Arrays and Time Complexity Quiz",
-        description: "Test your understanding of array operations and time complexity analysis",
+        title: "🚂 Linked Lists Train System Quiz",
+        description: "🎯 Test your train conductor skills! Master linked lists through fun scenarios!",
         course: dsaCourse._id,
         type: "lesson-quiz",
         difficulty: "intermediate",
         category: "data-structures",
         timeLimit: 15,
         passingScore: 70,
-        xpReward: 100,
+        xpReward: 120,
         questions: [
           {
-            question: "What is the time complexity of accessing an element in an array by index?",
+            question: "🚂 Your train has cars: Engine -> [Alice] -> [Bob] -> [Charlie] -> End. If you add [David] at the front, what's the new order?",
             type: "multiple-choice",
             options: [
-              { text: "O(1)", isCorrect: true },
-              { text: "O(log n)", isCorrect: false },
-              { text: "O(n)", isCorrect: false },
-              { text: "O(n²)", isCorrect: false }
+              { text: "Engine -> [David] -> [Alice] -> [Bob] -> [Charlie] -> End", isCorrect: true },
+              { text: "Engine -> [Alice] -> [Bob] -> [Charlie] -> [David] -> End", isCorrect: false },
+              { text: "Engine -> [Alice] -> [David] -> [Bob] -> [Charlie] -> End", isCorrect: false },
+              { text: "The train explodes! 💥", isCorrect: false }
             ],
-            explanation: "Array access by index is O(1) because arrays store elements in contiguous memory locations, allowing direct calculation of memory address.",
-            points: 1
+            explanation: "🎯 Perfect! When you add a car at the front, it becomes the new head (right after the engine). This is like inserting at the beginning of a linked list!",
+            points: 2
           },
           {
-            question: "In the worst case, what is the time complexity of inserting an element at the beginning of a dynamic array?",
+            question: "🔄 Time to reverse your train! If your current train is: Engine -> [A] -> [B] -> [C] -> End, what happens after reversing?",
             type: "multiple-choice",
             options: [
-              { text: "O(1)", isCorrect: false },
-              { text: "O(log n)", isCorrect: false },
-              { text: "O(n)", isCorrect: true },
-              { text: "O(n log n)", isCorrect: false }
+              { text: "Engine -> [C] -> [B] -> [A] -> End", isCorrect: true },
+              { text: "Engine -> [A] -> [B] -> [C] -> End", isCorrect: false },
+              { text: "End -> [A] -> [B] -> [C] -> Engine", isCorrect: false },
+              { text: "The train goes backward physically 🚂💨", isCorrect: false }
             ],
-            explanation: "Inserting at the beginning requires shifting all existing elements one position to the right, which takes O(n) time.",
-            points: 1
+            explanation: "🔄 Excellent! Reversing a linked list means changing all the pointer directions. The last element becomes first!",
+            points: 3
           },
           {
-            question: "Which technique is most efficient for finding two numbers in a sorted array that sum to a target?",
+            question: "🔍 Detective Time! You're searching for passenger 'Bob' in your train. Which traversal method will you use?",
             type: "multiple-choice",
             options: [
-              { text: "Brute force nested loops", isCorrect: false },
-              { text: "Two pointers technique", isCorrect: true },
-              { text: "Binary search", isCorrect: false },
-              { text: "Hash table", isCorrect: false }
+              { text: "Start from engine and check each car one by one", isCorrect: true },
+              { text: "Check random cars hoping to find Bob", isCorrect: false },
+              { text: "Ask all passengers to shout their names at once", isCorrect: false },
+              { text: "Use magic 🪄", isCorrect: false }
             ],
-            explanation: "Two pointers technique works optimally on sorted arrays, achieving O(n) time complexity compared to O(n²) brute force.",
-            points: 1
+            explanation: "🔍 Smart detective work! In a linked list, you must traverse sequentially from the head until you find your target. No random access like arrays!",
+            points: 2
+          }
+        ],
+        isPublished: true,
+        isActive: true
+      },
+      {
+        title: "🥞 Restaurant Stacks & Queues Quiz",
+        description: "🍽️ Test your restaurant management skills with stacks and queues!",
+        course: dsaCourse._id,
+        type: "lesson-quiz", 
+        difficulty: "intermediate",
+        category: "data-structures",
+        timeLimit: 12,
+        passingScore: 75,
+        xpReward: 150,
+        questions: [
+          {
+            question: "🥞 You have plates stacked: [Bottom] Dinner, Salad, Dessert [Top]. Chef needs a plate. Which one do you give?",
+            type: "multiple-choice",
+            options: [
+              { text: "Dessert plate (from top)", isCorrect: true },
+              { text: "Dinner plate (from bottom)", isCorrect: false },
+              { text: "Salad plate (from middle)", isCorrect: false },
+              { text: "Break all plates and start fresh 💥", isCorrect: false }
+            ],
+            explanation: "🥞 Correct! Stacks work on LIFO principle - Last In, First Out. The top plate (Dessert) was added last, so it comes out first!",
+            points: 2
+          },
+          {
+            question: "👥 Customer queue: [Front] Alice, Bob, Charlie [Back]. Who gets served first?",
+            type: "multiple-choice", 
+            options: [
+              { text: "Alice (first in line)", isCorrect: true },
+              { text: "Charlie (last in line)", isCorrect: false },
+              { text: "Bob (in the middle)", isCorrect: false },
+              { text: "Whoever yells loudest 📢", isCorrect: false }
+            ],
+            explanation: "👥 Perfect! Queues follow FIFO - First In, First Out. Alice arrived first, so she gets served first. Fair and square!",
+            points: 2
+          },
+          {
+            question: "⚡ Rush hour! Orders coming fast: Burger, Pizza, Pasta. Kitchen uses stack for orders. Which gets cooked first?",
+            type: "multiple-choice",
+            options: [
+              { text: "Pasta (latest order, highest priority)", isCorrect: true },
+              { text: "Burger (first order received)", isCorrect: false },
+              { text: "Pizza (middle order)", isCorrect: false },
+              { text: "Cook all at once! 🔥", isCorrect: false }
+            ],
+            explanation: "⚡ Smart! Kitchen stack prioritizes latest orders (LIFO). Pasta was ordered last, so it gets urgent attention first!",
+            points: 3
+          }
+        ],
+        isPublished: true,
+        isActive: true
+      },
+      // System Design Course Quiz
+      {
+        title: "🏗️ System Design Fundamentals Quiz",
+        description: "Test your knowledge of scalability, databases, and system architecture",
+        course: systemDesignCourse._id,
+        type: "lesson-quiz",
+        difficulty: "advanced",
+        category: "system-design",
+        timeLimit: 20,
+        passingScore: 80,
+        xpReward: 200,
+        questions: [
+          {
+            question: "What is the main advantage of horizontal scaling over vertical scaling?",
+            type: "multiple-choice",
+            options: [
+              { text: "Better fault tolerance and virtually unlimited scaling", isCorrect: true },
+              { text: "Easier to implement and manage", isCorrect: false },
+              { text: "Lower cost and complexity", isCorrect: false },
+              { text: "Faster single-machine performance", isCorrect: false }
+            ],
+            explanation: "Horizontal scaling provides better fault tolerance because if one machine fails, others continue running. It also offers virtually unlimited scaling potential.",
+            points: 2
+          },
+          {
+            question: "Which database type is best suited for applications requiring strict ACID properties?",
+            type: "multiple-choice",
+            options: [
+              { text: "SQL/Relational databases", isCorrect: true },
+              { text: "NoSQL document stores", isCorrect: false },
+              { text: "Key-value stores", isCorrect: false },
+              { text: "Graph databases", isCorrect: false }
+            ],
+            explanation: "SQL databases are designed with ACID properties (Atomicity, Consistency, Isolation, Durability) as core features, making them ideal for applications requiring strict data consistency.",
+            points: 2
+          }
+        ],
+        isPublished: true,
+        isActive: true
+      },
+      // Web Development Course Quiz
+      {
+        title: "⚛️ React & MERN Stack Quiz", 
+        description: "Test your full-stack web development knowledge",
+        course: webDevCourse._id,
+        type: "lesson-quiz",
+        difficulty: "intermediate",
+        category: "web-development", 
+        timeLimit: 18,
+        passingScore: 75,
+        xpReward: 180,
+        questions: [
+          {
+            question: "What is the correct way to handle state in a React functional component?",
+            type: "multiple-choice",
+            options: [
+              { text: "Using useState hook", isCorrect: true },
+              { text: "Using this.setState", isCorrect: false },
+              { text: "Direct variable assignment", isCorrect: false },
+              { text: "Using global variables", isCorrect: false }
+            ],
+            explanation: "useState hook is the proper way to manage state in React functional components. It returns current state and a setter function.",
+            points: 2
+          },
+          {
+            question: "Which HTTP method is typically used to create a new resource in a RESTful API?",
+            type: "multiple-choice",
+            options: [
+              { text: "POST", isCorrect: true },
+              { text: "GET", isCorrect: false },
+              { text: "PUT", isCorrect: false },
+              { text: "DELETE", isCorrect: false }
+            ],
+            explanation: "POST is used to create new resources. GET retrieves, PUT updates completely, and DELETE removes resources.",
+            points: 2
+          }
+        ],
+        isPublished: true,
+        isActive: true
+      },
+      // DevOps Course Quiz
+      {
+        title: "🐳 DevOps & Cloud Quiz",
+        description: "Test your DevOps, Docker, and cloud engineering knowledge",
+        course: devOpsCourse._id,
+        type: "lesson-quiz",
+        difficulty: "advanced",
+        category: "devops",
+        timeLimit: 15,
+        passingScore: 80,
+        xpReward: 170,
+        questions: [
+          {
+            question: "What is the primary benefit of containerization with Docker?",
+            type: "multiple-choice",
+            options: [
+              { text: "Application consistency across different environments", isCorrect: true },
+              { text: "Faster code compilation", isCorrect: false },
+              { text: "Better code syntax highlighting", isCorrect: false },
+              { text: "Automatic bug detection", isCorrect: false }
+            ],
+            explanation: "Docker ensures your application runs the same way across development, staging, and production environments by packaging everything needed to run the application.",
+            points: 2
+          },
+          {
+            question: "In Kubernetes, what is a Pod?",
+            type: "multiple-choice",
+            options: [
+              { text: "The smallest deployable unit that can contain one or more containers", isCorrect: true },
+              { text: "A cluster of machines", isCorrect: false },
+              { text: "A networking component", isCorrect: false },
+              { text: "A storage volume", isCorrect: false }
+            ],
+            explanation: "A Pod is the basic execution unit in Kubernetes, typically containing one container but can have multiple tightly coupled containers.",
+            points: 2
+          }
+        ],
+        isPublished: true,
+        isActive: true
+      },
+      // Machine Learning Course Quiz
+      {
+        title: "🤖 Machine Learning Fundamentals Quiz",
+        description: "Test your ML algorithms and deployment knowledge",
+        course: savedCourses.find(c => c.title.includes("Machine Learning"))._id,
+        type: "lesson-quiz",
+        difficulty: "advanced",
+        category: "ai-ml",
+        timeLimit: 25,
+        passingScore: 75,
+        xpReward: 220,
+        questions: [
+          {
+            question: "What is the main difference between supervised and unsupervised learning?",
+            type: "multiple-choice",
+            options: [
+              { text: "Supervised learning uses labeled data, unsupervised doesn't", isCorrect: true },
+              { text: "Supervised learning is faster to train", isCorrect: false },
+              { text: "Unsupervised learning is more accurate", isCorrect: false },
+              { text: "There is no significant difference", isCorrect: false }
+            ],
+            explanation: "Supervised learning algorithms learn from labeled training data to make predictions, while unsupervised learning finds patterns in unlabeled data.",
+            points: 2
+          },
+          {
+            question: "Which metric is most appropriate for evaluating a binary classification model with imbalanced classes?",
+            type: "multiple-choice",
+            options: [
+              { text: "F1-score or AUC-ROC", isCorrect: true },
+              { text: "Accuracy only", isCorrect: false },
+              { text: "Mean squared error", isCorrect: false },
+              { text: "R-squared", isCorrect: false }
+            ],
+            explanation: "F1-score balances precision and recall, while AUC-ROC is robust to class imbalance. Accuracy can be misleading with imbalanced datasets.",
+            points: 3
+          }
+        ],
+        isPublished: true,
+        isActive: true
+      },
+      // Database Course Quiz
+      {
+        title: "🗃️ SQL & Database Design Quiz",
+        description: "Test your database design and SQL optimization skills",
+        course: savedCourses.find(c => c.title.includes("Database"))._id,
+        type: "lesson-quiz",
+        difficulty: "intermediate",
+        category: "database",
+        timeLimit: 20,
+        passingScore: 75,
+        xpReward: 160,
+        questions: [
+          {
+            question: "What is the purpose of database normalization?",
+            type: "multiple-choice",
+            options: [
+              { text: "Reduce data redundancy and improve data integrity", isCorrect: true },
+              { text: "Increase query performance", isCorrect: false },
+              { text: "Make databases larger", isCorrect: false },
+              { text: "Simplify database structure", isCorrect: false }
+            ],
+            explanation: "Normalization reduces data redundancy and dependency by organizing data into well-structured tables, improving data integrity and reducing storage space.",
+            points: 2
+          },
+          {
+            question: "Which SQL clause is used to filter groups in an aggregate query?",
+            type: "multiple-choice",
+            options: [
+              { text: "HAVING", isCorrect: true },
+              { text: "WHERE", isCorrect: false },
+              { text: "GROUP BY", isCorrect: false },
+              { text: "ORDER BY", isCorrect: false }
+            ],
+            explanation: "HAVING filters groups after GROUP BY is applied, while WHERE filters individual rows before grouping.",
+            points: 2
           }
         ],
         isPublished: true,

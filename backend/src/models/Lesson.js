@@ -25,7 +25,7 @@ const lessonSchema = new mongoose.Schema({
   type: {
     type: String,
     required: [true, 'Lesson type is required'],
-    enum: ['theory', 'visual', 'code', 'quiz', 'project']
+    enum: ['theory', 'visual', 'code', 'quiz', 'project', 'interactive']
   },
   difficulty: {
     type: String,
